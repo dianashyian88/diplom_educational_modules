@@ -5,15 +5,15 @@
 +PostgreSQL
 +ORM
 +MVT/MTV
-FBV/CBV
-Serialiers
-Viewset/Generic
-Tests
++FBV/CBV
++Serialiers
++Viewset/Generic
 +Git
 +Readme
-PEP8
++PEP8
 +Swagger
-Docker
+-Tests
+-Docker
 Описание: Написать небольшой проект на Django и Django Rest Framework с моделью "Образовательные модули". 
 В них есть:
 - порядковый номер
@@ -26,6 +26,6 @@ Docker
 + код размещен в открытом репозитории
 + доступна документация
 - код покрыт автоматизированными юнит-тестами
-- код оформлен согласно pep8
++ код оформлен согласно pep8
 + оформлен Readme файл
 - в проекте использован Docker

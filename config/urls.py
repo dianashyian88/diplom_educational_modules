@@ -44,8 +44,8 @@ urlpatterns = [
     path('swagger<format>/',
          schema_view.without_ui(cache_timeout=0),
          name='schema-json'),
-    #path('', include('education.urls',
-                     #namespace='education')),
+    path('', include('education.urls',
+                     namespace='education')),
     path('users/', include('users.urls',
                            namespace='users')),
 ]

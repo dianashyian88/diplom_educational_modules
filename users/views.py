@@ -14,7 +14,8 @@ class UserCreateAPIView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         """Функция получает данные от пользователя при регистрации,
-        передает их в функцию создания пользователя и сохраняет пользователя"""
+        передает их в функцию создания пользователя
+        и сохраняет пользователя"""
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.data
