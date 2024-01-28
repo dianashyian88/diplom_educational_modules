@@ -13,6 +13,8 @@ class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
+        """Функция получает данные от пользователя при регистрации,
+        передает их в функцию создания пользователя и сохраняет пользователя"""
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.data
@@ -29,5 +31,25 @@ class UserCreateAPIView(generics.CreateAPIView):
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     """Эндпойнт выведения информации о пользователе"""
     serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [IsCurrentUser | IsStaff]
+
+
+class UserListAPIView(generics.ListAPIView):
+    """Эндпойнт выведения списка пользователей"""
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [IsStaff]
+
+
+class UserUpdateAPIView(generics.UpdateAPIView):
+    """Эндпойнт обновления информации о пользователе"""
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [IsCurrentUser | IsStaff]
+
+
+class UserDestroyAPIView(generics.DestroyAPIView):
+    """Эндпойнт удаления пользователя"""
     queryset = User.objects.all()
     permission_classes = [IsCurrentUser]

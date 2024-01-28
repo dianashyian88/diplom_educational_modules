@@ -2,6 +2,7 @@ from users.models import User
 
 
 def create_user(password, email, username, phone, city, telegram_id):
+    """Функция создания пользователя"""
     user = User.objects.create(
         email=email,
         username=username,

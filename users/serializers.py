@@ -3,7 +3,7 @@ from users.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    """ Сериализация пользователя. """
+    """Сериализация пользователя"""
 
     class Meta:
         model = User
@@ -12,5 +12,6 @@ class UserSerializer(serializers.ModelSerializer):
                   'phone',
                   'city',
                   'telegram_id',
-                  'password'
+                  'password',
+                  'avatar'
                   ]
