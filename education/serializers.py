@@ -17,7 +17,6 @@ class CourseSerializer(serializers.ModelSerializer):
     lessons = LessonSerializer(source='lesson_set',
                                many=True,
                                read_only=True)
-    subscription_status = serializers.SerializerMethodField()
 
     def get_lesson_count(self, obj):
         return Lesson.objects.filter(course=obj.pk).count()

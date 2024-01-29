@@ -1,7 +1,7 @@
 from rest_framework import generics
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from education.models import Course, Lesson
 from education.serializers import CourseSerializer, LessonSerializer
-from rest_framework.permissions import IsAuthenticated
 from education.permissions import IsOwner, IsStaff
 from education.pagination import EducationPaginator
 from education.tasks import send_mail_create_course
@@ -24,7 +24,7 @@ class CourseListAPIView(generics.ListAPIView):
     """Эндпойнт выведения списка курсов"""
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     pagination_class = EducationPaginator
 
     def list(self, request, *args, **kwargs):
@@ -39,7 +39,7 @@ class CourseRetrieveAPIView(generics.RetrieveAPIView):
     """Эндпойнт выведения информации об одном курсе"""
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
-    permission_classes = [IsStaff | IsOwner]
+    permission_classes = [IsAuthenticated]
 
 
 class CourseUpdateAPIView(generics.UpdateAPIView):
@@ -86,7 +86,7 @@ class LessonRetrieveAPIView(generics.RetrieveAPIView):
     """Эндпойнт выведения информации об одном уроке"""
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    permission_classes = [IsStaff | IsOwner]
+    permission_classes = [IsAuthenticated]
 
 
 class LessonUpdateAPIView(generics.UpdateAPIView):

@@ -15,8 +15,6 @@ class Course(models.Model):
                               on_delete=models.SET_NULL,
                               verbose_name='пользователь',
                               **NULLABLE)
-    price = models.PositiveIntegerField(verbose_name="цена",
-                                        default=10000)
     update_date = models.DateTimeField(
         auto_now=True,
         auto_now_add=False,
@@ -49,8 +47,6 @@ class Lesson(models.Model):
                               on_delete=models.SET_NULL,
                               verbose_name='пользователь',
                               **NULLABLE)
-    price = models.PositiveIntegerField(verbose_name="цена",
-                                        default=1000)
     update_date = models.DateTimeField(
         auto_now=True,
         auto_now_add=False,
