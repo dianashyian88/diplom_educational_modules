@@ -15,4 +15,5 @@ class DescriptionValidator:
         if len(result) != 0:
             for item in result:
                 if 'youtube.com' not in item:
-                    raise ValidationError('Материалы содержат недопустимые ссылки')
+                    raise ValidationError('Материалы содержат '
+                                          'недопустимые ссылки')

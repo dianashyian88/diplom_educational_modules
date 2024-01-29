@@ -11,7 +11,8 @@ def send_mail_create_course(name):
         send_mail(
             subject='Новый курс',
             message=f'Здравствуйте, {obj.username}'
-                    f'У нас появился новый курс "{name}". Возможно, Вам будет интересно.'
+                    f'У нас появился новый курс "{name}". '
+                    f'Возможно, Вам будет интересно.'
                     f'Скорее переходите на сайт, чтобы ознакомиться!!!',
             from_email=EMAIL_HOST_USER,
             recipient_list=[obj.email],

@@ -13,7 +13,8 @@ class CourseCreateAPIView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        """Функция сохраняет id пользователя, который создает курс, в поле owner"""
+        """Функция сохраняет id пользователя,
+        который создает курс, в поле owner"""
         new_course = serializer.save()
         new_course.owner = self.request.user
         new_course.save()
@@ -61,7 +62,8 @@ class LessonCreateAPIView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        """Функция сохраняет id пользователя, который создает урок, в поле owner"""
+        """Функция сохраняет id пользователя,
+        который создает урок, в поле owner"""
         new_lesson = serializer.save()
         new_lesson.owner = self.request.user
         new_lesson.save()
