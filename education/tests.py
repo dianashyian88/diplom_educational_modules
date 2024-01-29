@@ -19,7 +19,7 @@ class CourseTestCase(APITestCase):
         описания"""
         data = {
                     "name": "Основы ПДД",
-                    "description": "Курс раскрывает правила ДД. https://youtube.com"
+                    "description": "Коротко о курсе: https://youtube.com"
         }
         response = self.client.post(
             '/course/create/',
@@ -207,7 +207,7 @@ class LessonTestCase(APITestCase):
         data = {
             "name": "Урок 13. DRF PRO",
             "link_to_video": "http://youtube.com/check?uri=ert",
-            "description": "В этом урок вы изучите DRF на более углубленном уровне"
+            "description": "В этом урок вы изучите DRF на..."
         }
 
         response = self.client.put(
