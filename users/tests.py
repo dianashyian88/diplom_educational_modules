@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APIClient
 from users.models import User
 
 
@@ -7,24 +7,115 @@ class UserTestCase(APITestCase):
     """Авто-тесты для User"""
 
     def setUp(self) -> None:
-        pass
+        self.client = APIClient()
+        self.user = User.objects.create_user(username='Тестов Тест Тестович',
+                                             email='test1@mail.ru',
+                                             password='123456qwerty',
+                                             is_staff=True)
+        self.client.force_authenticate(user=self.user)
 
     def test_user_create(self):
         """Тестирование регистрации пользователя"""
-        pass
+        data = {
+            "username": "user1",
+            "email": "user1@gmail.com",
+            "password": "qweasdzxc"
+        }
+
+        response = self.client.post(
+            '/users/registration/',
+            data=data
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+
+        self.assertEqual(
+            response.json(),
+            {
+                "email": "user1@gmail.com",
+                "username": "user1",
+                "phone": None,
+                "city": None,
+                "telegram_id": None,
+                "password": "qweasdzxc",
+                "avatar": None
+            }
+        )
 
     def test_user_delete(self):
         """Тестирование удаления пользователя"""
-        pass
+        response = self.client.delete(
+            '/users/delete/15/'
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_204_NO_CONTENT
+        )
+
+    def test_user_delete_stop(self):
+        """Тестирование запрета удаления пользователя"""
+
+        User.objects.create(
+            id=2,
+            email="user1@user.user",
+            password="qweasdzxc"
+        )
+
+        response = self.client.delete(
+            '/users/delete/2/'
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_403_FORBIDDEN
+        )
 
     def test_user_detail(self):
         """Тестирование выведения информации о пользователе"""
-        pass
+        response = self.client.get(
+            '/users/detail/17/'
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
 
     def test_user_list(self):
         """Тестирование выведения списка пользователей"""
-        pass
+        User.objects.create(
+            id=20,
+            email="user1@user.user",
+            password="qweasdzxc"
+        )
+
+        response = self.client.get(
+            '/users/list/'
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
 
     def test_user_update(self):
         """Тестирование обновления информации о пользователе"""
-        pass
+        data = {
+            "username": "Тестов Тест",
+            "email": "test1@mail.ru",
+            "password": "qwerty123456789"
+        }
+
+        response = self.client.put(
+            '/users/update/19/',
+            data=data
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
