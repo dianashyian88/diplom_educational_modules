@@ -4,7 +4,7 @@ from users.models import User
 
 
 class UserTestCase(APITestCase):
-    """Авто-тесты для User"""
+    """Авто-тесты для view и serializer User"""
 
     def setUp(self) -> None:
         self.client = APIClient()
@@ -48,7 +48,7 @@ class UserTestCase(APITestCase):
     def test_user_delete(self):
         """Тестирование удаления пользователя"""
         response = self.client.delete(
-            '/users/delete/15/'
+            '/users/delete/16/'
         )
 
         self.assertEqual(
@@ -77,7 +77,7 @@ class UserTestCase(APITestCase):
     def test_user_detail(self):
         """Тестирование выведения информации о пользователе"""
         response = self.client.get(
-            '/users/detail/17/'
+            '/users/detail/18/'
         )
 
         self.assertEqual(
@@ -111,7 +111,7 @@ class UserTestCase(APITestCase):
         }
 
         response = self.client.put(
-            '/users/update/19/',
+            '/users/update/20/',
             data=data
         )
 
@@ -119,3 +119,20 @@ class UserTestCase(APITestCase):
             response.status_code,
             status.HTTP_200_OK
         )
+
+
+class UserModelTestCase(APITestCase):
+    """Авто-тесты для модели User"""
+
+    def setUp(self) -> None:
+        self.client = APIClient()
+        self.user = User.objects.create_user(username='Тестов Тест Тестович',
+                                             email='test1@mail.ru',
+                                             password='123456qwerty',
+                                             is_staff=True)
+        self.client.force_authenticate(user=self.user)
+
+    def test_user_view(self):
+        """Тестирование строкового представления пользователя"""
+        expected_object_name = self.user.email
+        self.assertEquals(expected_object_name, str(self.user))

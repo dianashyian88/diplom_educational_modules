@@ -5,7 +5,7 @@ from education.models import Course, Lesson
 
 
 class CourseTestCase(APITestCase):
-    """Авто-тесты для Course"""
+    """Авто-тесты для view Course"""
 
     def setUp(self) -> None:
         self.client = APIClient()
@@ -111,7 +111,7 @@ class CourseTestCase(APITestCase):
 
 
 class LessonTestCase(APITestCase):
-    """Авто-тесты для Lesson"""
+    """Авто-тесты для view Lesson"""
 
     def setUp(self) -> None:
         self.client = APIClient()
@@ -274,3 +274,38 @@ class CourseSerializerTestCase(APITestCase):
             response.status_code,
             status.HTTP_400_BAD_REQUEST
         )
+
+
+class CourseModelTestCase(APITestCase):
+    """Авто-тесты для модели Course"""
+
+    def setUp(self) -> None:
+        Course.objects.create(
+            id=1,
+            name="Основы финансовой грамотности",
+            description="Основы финансовой грамотности",
+        )
+
+    def test_course_view(self):
+        """Тестирование строкового представления курса"""
+        course = Course.objects.get(id=1)
+        expected_object_name = course.name
+        self.assertEquals(expected_object_name, str(course))
+
+
+class LessonModelTestCase(APITestCase):
+    """Авто-тесты для модели Lesson"""
+
+    def setUp(self) -> None:
+        Lesson.objects.create(
+            id=1,
+            name="Урок 13. DRF",
+            link_to_video="http://youtube.com/check?uri=",
+            description="В этом урок вы изучите DRF"
+        )
+
+    def test_course_view(self):
+        """Тестирование строкового представления урока"""
+        lesson = Lesson.objects.get(id=1)
+        expected_object_name = lesson.name
+        self.assertEquals(expected_object_name, str(lesson))
