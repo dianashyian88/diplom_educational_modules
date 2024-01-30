@@ -304,7 +304,7 @@ class LessonModelTestCase(APITestCase):
             description="В этом урок вы изучите DRF"
         )
 
-    def test_course_view(self):
+    def test_lesson_view(self):
         """Тестирование строкового представления урока"""
         lesson = Lesson.objects.get(id=1)
         expected_object_name = lesson.name
