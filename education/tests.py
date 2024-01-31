@@ -18,8 +18,8 @@ class CourseTestCase(APITestCase):
         """Тестирование создания курса с валидацией
         описания"""
         data = {
-                    "name": "Основы ПДД",
-                    "description": "Коротко о курсе: https://youtube.com"
+            "name": "Основы ПДД",
+            "description": "Коротко о курсе: https://youtube.com"
         }
         response = self.client.post(
             '/course/create/',
@@ -262,8 +262,8 @@ class CourseSerializerTestCase(APITestCase):
     def test_course_validate(self):
         """Тестирование валидации курса"""
         data = {
-                    "name": "Основы ПДД",
-                    "description": "https://skyeng.com"
+            "name": "Основы ПДД",
+            "description": "https://skyeng.com"
         }
         response = self.client.post(
             '/course/create/',
