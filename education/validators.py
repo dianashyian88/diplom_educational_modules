@@ -17,3 +17,15 @@ class DescriptionValidator:
                 if 'youtube.com' not in item:
                     raise ValidationError('Материалы содержат '
                                           'недопустимые ссылки')
+
+
+class NumberValidator:
+    """Валидатор для проверки номера на 0"""
+
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, value):
+        tmp_val = dict(value).get(self.field)
+        if tmp_val == 0:
+            raise ValidationError('Номер не может быть равен 0')

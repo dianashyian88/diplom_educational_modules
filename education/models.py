@@ -5,6 +5,9 @@ from users.models import NULLABLE
 
 class Course(models.Model):
     """Модель образовательных модулей (курсов)"""
+    number = models.PositiveIntegerField(
+        verbose_name='порядковый номер',
+        **NULLABLE)
     name = models.CharField(max_length=50,
                             verbose_name='наименование')
     image = models.ImageField(upload_to='course/',
