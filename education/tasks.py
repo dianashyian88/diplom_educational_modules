@@ -10,9 +10,9 @@ def send_mail_create_course(name):
     for obj in list_user:
         send_mail(
             subject='Новый курс',
-            message=f'Здравствуйте, {obj.username}'
+            message=f'Здравствуйте, {obj.username}! '
                     f'У нас появился новый курс "{name}". '
-                    f'Возможно, Вам будет интересно.'
+                    f'Возможно, Вам будет интересно. '
                     f'Скорее переходите на сайт, чтобы ознакомиться!!!',
             from_email=EMAIL_HOST_USER,
             recipient_list=[obj.email],
